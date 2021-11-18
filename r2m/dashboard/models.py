@@ -1,8 +1,16 @@
 from django.db import models
 
 class Client(models.Model):
-    PROFESSION = ('Avocat', 'Expert-comptable', 'Maire')
-    STATUT = ('Client', 'Lead qualifié', 'Prospect')
+    PROFESSION = (
+        ('Avocat', 'Avocat'), 
+        ('Expert-comptable', 'Expert-comptable'),
+        ('Maire', 'Maire')
+    )
+    STATUT = (
+        ('Client','Client'),
+        ('Lead qualifié','Lead qualifié'),
+        ('Prospect','Prospect')
+    )
     firstname = models.CharField(max_length=200, null=True)
     lastname = models.CharField(max_length=200, null=True)
     profession = models.CharField(max_length=200, null=True, choices=PROFESSION)
@@ -28,7 +36,7 @@ class Cadreur(models.Model):
         return [self.firstname, self.lastname]
 
 
-class IngénieurSon(models.Model):
+class IngenieurSon(models.Model):
     firstname = models.CharField(max_length=200, null=True)
     lastname = models.CharField(max_length=200, null=True)
     cost = models.FloatField(null=True)
@@ -45,8 +53,17 @@ class Monteur(models.Model):
         return [self.firstname, self.lastname]
 
 class Video(models.Model):
-    PRODUCTION_STAGE = ('En pré-production', 'En production', 'En post-production', 'Publiée')
-    LIEU_TOURNAGE = ('Studio 1', 'Studio 2', 'Studio 3')
+    PRODUCTION_STAGE = (
+        ('En pré-production', 'En pré-production'),
+        ('En production', 'En production'),
+        ('En post-production', 'En post-production'),
+        ('Publiée', 'Publiée')
+    )
+    LIEU_TOURNAGE = (
+        ('Studio 1','Studio 1'),
+        ('Studio 2','Studio 2'),
+        ('Studio 3', 'Studio 3')
+    )
     #Informations générales
     videoName = models.CharField(max_length=200, null=True)
     stage = models.CharField(max_length=200, null=True, choices=PRODUCTION_STAGE)
@@ -60,7 +77,7 @@ class Video(models.Model):
     client = models.ForeignKey(Client, null=True, on_delete=models.SET_NULL)
     chefProjet = models.ForeignKey(ChefProjet, null=True, on_delete=models.SET_NULL)
     cadreur = models.ForeignKey(Cadreur, null=True, on_delete=models.SET_NULL)
-    ingénieurSon = models.ForeignKey(IngénieurSon, null=True, on_delete=models.SET_NULL)
+    ingénieurSon = models.ForeignKey(IngenieurSon, null=True, on_delete=models.SET_NULL)
     monteur = models.ForeignKey(Monteur, null=True, on_delete=models.SET_NULL)
 
     #Visibilité de la vidéo
