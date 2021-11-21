@@ -13,7 +13,8 @@ def clientsBasePage(request):
     return render(request, 'dashboard/clientsBasepage.html', context)
 
 def clientPage(request, pk):
-    pass
+    client = Client.objects.get(id=pk)
+    
 
 def videoBasePage(request):
     videos = Video.objects.all()
