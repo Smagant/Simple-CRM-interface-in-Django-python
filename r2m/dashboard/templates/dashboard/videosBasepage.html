@@ -1,0 +1,29 @@
+{% extends 'dashboard/main.html' %}
+{% block content %}
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Nom de la vidéo</th>
+                    <th>CLient associé</th>
+                    <th>Étape de production</th>
+                    <th>Date de publication</th>
+                    <th>Chef de projet</th>
+                </tr>
+
+                {% for video in videos %}
+                    <tr>
+                        <td>{{video.videoName}}</td>
+                        <td>{{video.client}}</td>
+                        <td>{{video.stage}}</td>
+                        <td>{{video.datePublication}}</td>
+                        <td>{{video.chefProjet}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

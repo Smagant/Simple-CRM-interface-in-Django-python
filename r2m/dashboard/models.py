@@ -17,7 +17,7 @@ class Client(models.Model):
     statut = models.CharField(max_length=200, null=True, choices=STATUT)
     
     def __str__(self):
-        return [self.firstname, self.lastname]
+        return self.lastname
 
 class ChefProjet(models.Model):
     firstname = models.CharField(max_length=200, null=True)
@@ -25,7 +25,7 @@ class ChefProjet(models.Model):
     cost = models.FloatField(null=True)
     
     def __str__(self):
-        return [self.firstname, self.lastname]
+        return self.lastname
 
 class Cadreur(models.Model):
     firstname = models.CharField(max_length=200, null=True)
@@ -33,7 +33,7 @@ class Cadreur(models.Model):
     cost = models.FloatField(null=True)
     
     def __str__(self):
-        return [self.firstname, self.lastname]
+        return self.lastname
 
 
 class IngenieurSon(models.Model):
@@ -42,7 +42,7 @@ class IngenieurSon(models.Model):
     cost = models.FloatField(null=True)
 
     def __str__(self):
-        return [self.firstname, self.lastname]
+        return self.lastname
 
 class Monteur(models.Model):
     firstname = models.CharField(max_length=200, null=True)
@@ -50,7 +50,7 @@ class Monteur(models.Model):
     cost = models.FloatField(null=True)
 
     def __str__(self):
-        return [self.firstname, self.lastname]
+        return self.lastname
 
 class Video(models.Model):
     PRODUCTION_STAGE = (

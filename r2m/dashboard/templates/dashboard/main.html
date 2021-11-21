@@ -1,31 +1,30 @@
-<!-- wp:group {"align":"full","style":{"color":{"background":"#e1ded7","text":"#1d1e1e"},"spacing":{"padding":{"top":"100px","right":"0px","bottom":"100px"}}}} -->
-<div class="wp-block-group alignfull has-text-color has-background" style="background-color:#e1ded7;color:#1d1e1e;padding-top:100px;padding-right:0px;padding-bottom:100px"><!-- wp:paragraph {"align":"center","style":{"typography":{"lineHeight":"1.4","fontSize":"36px"}}} -->
-    <p class="has-text-align-center" style="font-size:36px;line-height:1.4">Hi, I’m <em>Linda Antin</em>,<br>an independent designer and filmmaker <br>who loves nature.</p>
-    <!-- /wp:paragraph -->
-    
-    <!-- wp:spacer -->
-    <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
-    <!-- /wp:spacer -->
-    
-    <!-- wp:image {"id":3858,"sizeSlug":"large","linkDestination":"none"} -->
-    <figure class="wp-block-image size-large"><img src="https://dotcompatterns.files.wordpress.com/2021/04/stocksnap_rg6usyji2a.jpeg?w=781" alt="" class="wp-image-3858"/></figure>
-    <!-- /wp:image -->
-    
-    <!-- wp:columns {"align":"wide"} -->
-    <div class="wp-block-columns alignwide"><!-- wp:column -->
-    <div class="wp-block-column"><!-- wp:spacer {"height":170} -->
-    <div style="height:170px" aria-hidden="true" class="wp-block-spacer"></div>
-    <!-- /wp:spacer -->
-    
-    <!-- wp:image {"id":3860,"sizeSlug":"large","linkDestination":"none"} -->
-    <figure class="wp-block-image size-large"><img src="https://dotcompatterns.files.wordpress.com/2021/04/stocksnap_qjo8nshmnx.jpeg?w=781" alt="" class="wp-image-3860"/></figure>
-    <!-- /wp:image --></div>
-    <!-- /wp:column -->
-    
-    <!-- wp:column -->
-    <div class="wp-block-column"><!-- wp:image {"id":3859,"sizeSlug":"large","linkDestination":"none"} -->
-    <figure class="wp-block-image size-large"><img src="https://dotcompatterns.files.wordpress.com/2021/04/stocksnap_kjxywo8cmm.jpeg?w=781" alt="" class="wp-image-3859"/></figure>
-    <!-- /wp:image --></div>
-    <!-- /wp:column --></div>
-    <!-- /wp:columns --></div>
-    <!-- /wp:group --></div>
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DASHBOARD</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+
+    </head>
+    <body>
+        {% include 'dashboard/navbar.html' %}
+        <div class="container-fluid">
+            {% block content %}
+        
+
+
+            {% endblock %}    
+        </div>
+        
+        <hr>
+        <h5>Antoine Smaguine - projet python</h5>
+    </body>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</html>

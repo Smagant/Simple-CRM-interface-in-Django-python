@@ -1,0 +1,27 @@
+{% extends 'dashboard/main.html' %}
+{% block content %}
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Profession</th>
+                    <th>Statut</th>
+                </tr>
+
+                {% for client in clients %}
+                    <tr>
+                        <td>{{client.firstname}}</td>
+                        <td>{{client.lastname}}</td>
+                        <td>{{client.profession}}</td>
+                        <td>{{client.statut}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
