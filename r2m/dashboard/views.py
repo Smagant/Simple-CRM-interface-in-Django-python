@@ -35,19 +35,20 @@ def videoPage(request, pk):
 
 def createVideo(request, pk):
     VideoFormSet = inlineformset_factory(Client, Video, fields=('product', 'status'), extra=10)
-    customer = Client.objects.get(id=pk)
-    formset = VideoFormSet(queryset=Video.objects.none(), instance=customer)
+    client = Client.objects.get(id=pk)
+    formset = VideoFormSet(queryset=Video.objects.none(), instance=client)
     #form = OrderForm(initial={'customer':customer})
     if request.method == 'POST':
         #print('Printing POST',request.POST)
         #form = OrderForm(request.POST)
-        formset = VideoFormSet(request.POST, instance=customer)
+        formset = VideoFormSet(request.POST, instance=client)
         if formset.is_valid():
             formset.save()
             return redirect('/')
 
     context = {'formset':formset}     
     return render(request, 'dashboard/video_form.html', context)
+
 
 def updateVideo(request, pk):
     order = Video.objects.get(id=pk)
@@ -61,7 +62,7 @@ def updateVideo(request, pk):
     context = {'form':form}
     return render(request, 'dashboard/video_form.html', context)
 
-def deleteOrder(request, pk):
+def deleteVideo(request, pk):
     video = Video.objects.get(id=pk)
     if request.method == "POST":
         video.delete()

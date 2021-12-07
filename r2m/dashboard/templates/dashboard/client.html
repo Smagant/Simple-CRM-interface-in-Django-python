@@ -9,9 +9,7 @@
 				<h5>Client:</h5>
 				<hr>
 				<a class="btn btn-outline-info  btn-sm btn-block" href="">Update CLient</a>
-				<!--
-                <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_order' customer.id %}">Place order</a>
-                -->
+                <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_video' client.id %}">Place order</a>
 			</div>
 		</div>
 
@@ -72,10 +70,8 @@
                             <td>{{video.cadreur}}</td>
                             <td>{{video.ingénieurSon}}</td>
                             <td>{{video.monteur}}</td>
-							<!--
-                            <td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
-							<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
-                            -->
+                            <td><a class="btn btn-sm btn-info" href="{% url 'update_video' video.id %}">Update</a></td>
+							<td><a class="btn btn-sm btn-danger" href="{% url 'delete_video' video.id %}">Delete</a></td>
                         </tr>
 					{% endfor %}
 				</table>
