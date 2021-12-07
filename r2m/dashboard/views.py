@@ -1,6 +1,9 @@
-from django.shortcuts import render
-from .models import *
+from django.shortcuts import render, redirect
+from django.forms import inlineformset_factory
 
+from .models import *
+from .filters import VideoFilter
+from .forms import VideoForm
 
 # Create your views here.
 def home(request): 
@@ -14,7 +17,13 @@ def clientsBasePage(request):
 
 def clientPage(request, pk):
     client = Client.objects.get(id=pk)
-    
+    videos = client.video_set.all()
+    videos_count = videos.count()
+    myFilter = VideoFilter(request.GET, queryset=videos)
+    videos = myFilter.qs
+
+    context = {'client': client, 'videos':videos, 'videos_count':videos_count, 'myFilter': myFilter}
+    return render(request, 'dashboard/client.html', context)
 
 def videoBasePage(request):
     videos = Video.objects.all()
@@ -24,4 +33,38 @@ def videoBasePage(request):
 def videoPage(request, pk):
     pass
 
+def createVideo(request, pk):
+    VideoFormSet = inlineformset_factory(Client, Video, fields=('product', 'status'), extra=10)
+    customer = Client.objects.get(id=pk)
+    formset = VideoFormSet(queryset=Video.objects.none(), instance=customer)
+    #form = OrderForm(initial={'customer':customer})
+    if request.method == 'POST':
+        #print('Printing POST',request.POST)
+        #form = OrderForm(request.POST)
+        formset = VideoFormSet(request.POST, instance=customer)
+        if formset.is_valid():
+            formset.save()
+            return redirect('/')
 
+    context = {'formset':formset}     
+    return render(request, 'dashboard/video_form.html', context)
+
+def updateVideo(request, pk):
+    order = Video.objects.get(id=pk)
+    form = VideoForm(instance=order)
+    if request.method == 'POST':
+        form = VideoForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    
+    context = {'form':form}
+    return render(request, 'dashboard/video_form.html', context)
+
+def deleteOrder(request, pk):
+    video = Video.objects.get(id=pk)
+    if request.method == "POST":
+        video.delete()
+        return redirect('/')
+    context = {'item':video}
+    return render(request, 'dashboard/delete.html', context)

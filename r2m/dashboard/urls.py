@@ -8,7 +8,7 @@ urlpatterns = [
     path('videobase/', views.videoBasePage, name='videobase'),
     path('video/<str:pk>/', views.videoPage, name='video'),
 
-    #path('create_order/<str:pk>/', views.createOrder, name='create_order'),
-    #path('update_order/<str:pk>/', views.updateOrder, name='update_order'),
-    #path('delete_order/<str:pk>/', views.deleteOrder, name='delete_order'),
+    path('create_video/<str:pk>/', views.createVideo, name='create_video'),
+    path('update_video/<str:pk>/', views.updateVideo, name='update_video'),
+    path('delete_video/<str:pk>/', views.deleteVideo, name='delete_video'),
 ]
