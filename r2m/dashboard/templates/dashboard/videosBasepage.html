@@ -6,6 +6,7 @@
         <div class="card card-body">
             <table class="table table-sm">
                 <tr>
+                    <th></th>
                     <th>Nom de la vidéo</th>
                     <th>CLient associé</th>
                     <th>Étape de production</th>
@@ -15,6 +16,7 @@
 
                 {% for video in videos %}
                     <tr>
+                        <td><a class="btn btn-sm btn-info" href="{% url 'video' video.id  %}">Fiche video</a></td>
                         <td>{{video.videoName}}</td>
                         <td>{{video.client}}</td>
                         <td>{{video.stage}}</td>

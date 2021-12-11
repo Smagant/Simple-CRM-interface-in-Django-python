@@ -15,7 +15,7 @@
 
                 {% for client in clients %}
                     <tr>
-                        <td><a class="btn btn-sm btn-info" href="{% url 'client' client.id  %}">View</a></td>
+                        <td><a class="btn btn-sm btn-info" href="{% url 'client' client.id  %}">Fiche client</a></td>
                         <td>{{client.firstname}}</td>
                         <td>{{client.lastname}}</td>
                         <td>{{client.profession}}</td>

@@ -34,7 +34,33 @@ def videoPage(request, pk):
     pass
 
 def createVideo(request, pk):
-    VideoFormSet = inlineformset_factory(Client, Video, fields=('product', 'status'), extra=10)
+    videoFields = (
+        'videoName',
+        'stage',
+        'datePublication',
+        'lieuTournage',
+        'dateTournage',
+        'heureTournage',
+        'revenusGen',
+        'chefProjet',
+        'cadreur',
+        'ingénieurSon',
+        'monteur',
+        'impressionsLinkedin',
+        'likesLinkedin',
+        'partagesLinkedin',
+        'impressionsFacebook',
+        'likesFacebook',
+        'partagesFacebook',
+        'impressionsInstagram',
+        'likesInstagram',
+        'partagesInstagram',
+        'impressionsTwitter',
+        'likesTwitter',
+        'partagesTwitter'
+    )
+    
+    VideoFormSet = inlineformset_factory(Client, Video, fields=videoFields, extra=1)
     client = Client.objects.get(id=pk)
     formset = VideoFormSet(queryset=Video.objects.none(), instance=client)
     #form = OrderForm(initial={'customer':customer})
@@ -51,10 +77,10 @@ def createVideo(request, pk):
 
 
 def updateVideo(request, pk):
-    order = Video.objects.get(id=pk)
-    form = VideoForm(instance=order)
+    video = Video.objects.get(id=pk)
+    form = VideoForm(instance=video)
     if request.method == 'POST':
-        form = VideoForm(request.POST, instance=order)
+        form = VideoForm(request.POST, instance=video)
         if form.is_valid():
             form.save()
             return redirect('/')
