@@ -9,24 +9,31 @@
 				<h5>Vidéo:</h5>
 				<hr>
 				<a class="btn btn-outline-info  btn-sm btn-block" href="">Modifier vidéo</a>
-                <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_video' client.id %}">Ajouter une vidéo</a>
 			</div>
 		</div>
 
 		<div class="col-md">
 			<div class="card card-body">
-				<h5>Contact Information</h5>
+				<h5>Video Information</h5>
 				<hr>
-				<p>Profession: {{client.profession}}</p>
-				<p>Phone: {{client.statut}}</p>
+				<p>Nom de la vidéo : {{video.videoName}}</p>
+				<p>Client: {{video.client}}</p>
+				<p>Étape de production: {{video.stage}}</p>
+				<p>Date de publication: {{video.datePublication}}</p>
+				<p>Lieu de tournage: {{video.lieuTournage}}</p>
+				<p>Date de tournage: {{video.dateTournage}}</p>
+				<p>Heure de tournage: {{video.heureTournage}}</p>
 			</div>
 		</div>
 
 		<div class="col-md">
 			<div class="card card-body">
-				<h5>Nombre total de vidéos</h5>
+				<h5>Équipe de production</h5>
 				<hr>
-				<h1 style="text-align: center;padding: 10px">{{videos_count}}</h1>
+				<p>Chef de projet: {{video.chefProjet}}</p>
+				<p>Cadreur: {{video.cadreur}}</p>
+				<p>Ingénieur son: {{video.ingénieurSon}}</p>
+				<p>Monteur: {{video.monteur}}</p>
 			</div>
 		</div>
 	</div>
@@ -34,17 +41,27 @@
 
 	<br>
 	<div class="row">
-		<div class="col">
+		
+		<div class="col-md">
 			<div class="card card-body">
-				<form method="get">
-					{{myFilter.form}}
+				<h5>Revenus générés par la vidéo</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{video.revenusGen}}</h1>
+			</form>
+			</div>
+		</div>
 
-				<button class="btn btn-primary" type="submit">Search</button>
+		<div class="col-md">
+			<div class="card card-body">
+				<h5>Coûts de la vidéo</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{cost}}</h1>
 			</form>
 			</div>
 		</div>
 		
 	</div>
+	
 	<br>
 
 	<div class="row">
@@ -52,28 +69,39 @@
 			<div class="card card-body">
 				<table class="table table-sm">
 					<tr>
-						<th>Video</th>
-						<th>Status</th>
-						<th>Date de publication</th>
-						<th>Chef de projet</th>
-						<th>Cadreur</th>
-						<th>Ingénieur Son</th>
-                        <th>Monteur</th>
+						<th>Plateforme</th>
+						<th>Impressions</th>
+						<th>Likes</th>
+						<th>Partages</th>
 					</tr>
 
-					{% for video in videos %}
-						<tr>
-							<td>{{video.videoname}}</td>
-							<td>{{video.stage}}</td>
-							<td>{{video.datePublication}}</td>
-							<td>{{video.chefProjet}}</td>
-                            <td>{{video.cadreur}}</td>
-                            <td>{{video.ingénieurSon}}</td>
-                            <td>{{video.monteur}}</td>
-                            <td><a class="btn btn-sm btn-info" href="{% url 'update_video' video.id %}">Update</a></td>
-							<td><a class="btn btn-sm btn-danger" href="{% url 'delete_video' video.id %}">Delete</a></td>
-                        </tr>
-					{% endfor %}
+					<tr>
+						<td>LinkedIn</td>
+						<td>{{video.impressionsLinkedin}}</td>
+						<td>{{video.likesLinkedin}}</td>
+						<td>{{video.partagesLinkedin}}</td>
+					</tr>
+
+					<tr>
+						<td>Facebook</td>
+						<td>{{video.impressionsFacebook}}</td>
+						<td>{{video.likesFacebook}}</td>
+						<td>{{video.partagesFacebook}}</td>
+					</tr>
+
+					<tr>
+						<td>Instagram</td>
+						<td>{{video.impressionsInstagram}}</td>
+						<td>{{video.likesInstagram}}</td>
+						<td>{{video.partagesInstagram}}</td>
+					</tr>
+
+					<tr>
+						<td>Twitter</td>
+						<td>{{video.impressionsTwitter}}</td>
+						<td>{{video.likesTwitter}}</td>
+						<td>{{video.partagesTwitter}}</td>
+					</tr>
 				</table>
 			</div>
 		</div>

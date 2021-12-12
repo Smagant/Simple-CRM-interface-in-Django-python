@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 
 from .models import *
-from .filters import VideoFilter
 from .forms import VideoForm
 
-# Create your views here.
+
 def home(request): 
     context = {'title': 'test'}
     return render(request, 'dashboard/main.html', context)
@@ -16,13 +15,27 @@ def clientsBasePage(request):
     return render(request, 'dashboard/clientsBasepage.html', context)
 
 def clientPage(request, pk):
+    #Récupérer les informations du client
     client = Client.objects.get(id=pk)
+    #Récupérer les informations sur les vidéos du client spécifiquement
     videos = client.video_set.all()
+    #Compter le nombre de vidéo qu'à fait le client au total
     videos_count = videos.count()
-    myFilter = VideoFilter(request.GET, queryset=videos)
-    videos = myFilter.qs
-
-    context = {'client': client, 'videos':videos, 'videos_count':videos_count, 'myFilter': myFilter}
+    #Calculer le coût de toutes les vidéos du client
+    clientCost = 0
+    for v in videos:
+        try:
+            clientCost += v.chefProjet.cost + v.cadreur.cost + v.ingénieurSon.cost + v.monteur.cost
+        except:
+            continue
+    #Calculer le revenus de toutes les vidéos du client
+    clientRev = 0
+    for v in videos:
+        try:
+            clientRev += v.revenusGen
+        except:
+            continue
+    context = {'client': client, 'videos':videos, 'videos_count':videos_count, 'clientCost': clientCost, 'clientRev':clientRev}
     return render(request, 'dashboard/client.html', context)
 
 def videoBasePage(request):
@@ -31,7 +44,14 @@ def videoBasePage(request):
     return render(request, 'dashboard/videosBasepage.html', context)
 
 def videoPage(request, pk):
-    pass
+    video = Video.objects.get(id=pk)
+    cost = video.chefProjet.cost + video.cadreur.cost + video.ingénieurSon.cost + video.monteur.cost
+    context = {'video':video, 'cost':cost}
+    return render(request, 'dashboard/video.html', context)
+
+def createClient(request, pk):
+    clientFields = ()
+
 
 def createVideo(request, pk):
     videoFields = (
@@ -77,16 +97,17 @@ def createVideo(request, pk):
 
 
 def updateVideo(request, pk):
-    video = Video.objects.get(id=pk)
-    form = VideoForm(instance=video)
-    if request.method == 'POST':
-        form = VideoForm(request.POST, instance=video)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    
-    context = {'form':form}
-    return render(request, 'dashboard/video_form.html', context)
+	video = Video.objects.get(id=pk)
+	form = VideoForm(instance=video)
+
+	if request.method == 'POST':
+		form = VideoForm(request.POST, instance=video)
+		if form.is_valid():
+			form.save()
+			return redirect('/')
+
+	context = {'form':form}
+	return render(request, 'dashboard/video_updateForm.html', context)
 
 def deleteVideo(request, pk):
     video = Video.objects.get(id=pk)

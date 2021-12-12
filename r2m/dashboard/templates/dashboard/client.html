@@ -34,12 +34,21 @@
 
 	<br>
 	<div class="row">
-		<div class="col">
+		
+		<div class="col-md">
 			<div class="card card-body">
-				<form method="get">
-					{{myFilter.form}}
+				<h5>Revenus générés par le client</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{clientRev}}</h1>
+			</form>
+			</div>
+		</div>
 
-				<button class="btn btn-primary" type="submit">Search</button>
+		<div class="col-md">
+			<div class="card card-body">
+				<h5>Coûts engendré par le client</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{clientCost}}</h1>
 			</form>
 			</div>
 		</div>
@@ -63,7 +72,7 @@
 
 					{% for video in videos %}
 						<tr>
-							<td>{{video.videoname}}</td>
+							<td>{{video.videoName}}</td>
 							<td>{{video.stage}}</td>
 							<td>{{video.datePublication}}</td>
 							<td>{{video.chefProjet}}</td>

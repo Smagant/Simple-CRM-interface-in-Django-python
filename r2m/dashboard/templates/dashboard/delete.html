@@ -10,7 +10,7 @@
             <p>Êtes-vous sûr de supprimer "{{item}}"?</p>
             <form action="{% url 'delete_video' item.id %}" method="POST">
                 {% csrf_token %}
-                <a class="btn btn-warning" href="{% url 'home' %}">Cancel</a>
+                <a class="btn btn-warning" href="{% url 'home' %}">Annuler</a>
                 <input class="btn btn-danger" type="submit" name="Confirm">
             </form>
             
