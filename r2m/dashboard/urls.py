@@ -12,6 +12,7 @@ urlpatterns = [
     path('update_video/<str:pk>/', views.updateVideo, name='update_video'),
     path('delete_video/<str:pk>/', views.deleteVideo, name='delete_video'),
 
+    path('create_client/', views.createClient, name='create_client'),
     path('update_client/<str:pk>/', views.updateClient, name='update_client'),
-    path('create_client/', views.createClient, name='create_client')
+    path('delete_client/<str:pk>/', views.deleteClient, name='delete_client')
 ]

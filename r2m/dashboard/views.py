@@ -50,24 +50,17 @@ def videoPage(request, pk):
     return render(request, 'dashboard/video.html', context)
 
 def createClient(request):
-    clientFields = ()
+	form = ClientForm()
+	if request.method == 'POST':
+		form = ClientForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('/')
 
-    VideoFormSet = inlineformset_factory(Client, Video, fields=videoFields, extra=1)
-    client = Client.objects.get(id=pk)
-    formset = VideoFormSet(queryset=Video.objects.none(), instance=client)
-    #form = OrderForm(initial={'customer':customer})
-    if request.method == 'POST':
-        #print('Printing POST',request.POST)
-        #form = OrderForm(request.POST)
-        formset = VideoFormSet(request.POST, instance=client)
-        if formset.is_valid():
-            formset.save()
-            return redirect('/')
+	context = {'form':form}
+	return render(request, 'dashboard/client_form.html', context)
 
-    context = {'formset':formset}     
-    return render(request, 'dashboard/video_form.html', context)
 
-    
 def createVideo(request, pk):
     videoFields = (
         'videoName',
@@ -130,7 +123,7 @@ def deleteVideo(request, pk):
         video.delete()
         return redirect('/')
     context = {'item':video}
-    return render(request, 'dashboard/delete.html', context)
+    return render(request, 'dashboard/deleteVideo.html', context)
 
 def updateClient(request, pk):
 	client = Client.objects.get(id=pk)
@@ -144,3 +137,11 @@ def updateClient(request, pk):
 
 	context = {'form':form}
 	return render(request, 'dashboard/client_updateForm.html', context)
+
+def deleteClient(request, pk):
+    client = Client.objects.get(id=pk)
+    if request.method == "POST":
+        client.delete()
+        return redirect('/')
+    context = {'item':client}
+    return render(request, 'dashboard/deleteClient.html', context)

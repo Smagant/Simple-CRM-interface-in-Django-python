@@ -11,6 +11,7 @@
                     <th>Nom</th>
                     <th>Profession</th>
                     <th>Statut</th>
+                    <th></th>
                 </tr>
 
                 {% for client in clients %}
@@ -20,6 +21,7 @@
                         <td>{{client.lastname}}</td>
                         <td>{{client.profession}}</td>
                         <td>{{client.statut}}</td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_client' client.id %}">Supprimer</a></td>
                     </tr>
                 {% endfor %}
             </table>
