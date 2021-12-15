@@ -9,10 +9,37 @@
             <form action="" method="POST">
                 {% csrf_token %}
                 {{ form.management_form }}
-                {%for f in form %}
-                    <span>{{f}}</span>
-                    <br>
-                {% endfor %}
+                
+                <p>Nom de la video: {{form.videoName}}</p>
+                <p>Étape de production: {{form.stage}}</p>
+                <p>Date de Publication: {{form.datePublication}}</p>
+                <p>Lieu de tournage: {{form.lieuTournage}}</p>
+                <p>Date de tournage: {{form.dateTournage}}</p>
+                <p>Heure de tournage: {{form.heureTournage}}</p>
+                <p>Revenus générés: {{form.revenusGen}}</p>
+                
+                <p>Client associé: {{form.client}}</p>
+                <p>Chef de projet: {{form.chefProjet}}</p>
+                <p>Cadreur: {{form.cadreur}}</p>
+                <p>Ingénieur Son: {{form.ingénieurSon}}</p>
+                <p>Monteur: {{form.monteur}}</p>
+
+                <p>Impressions LinkedIn: {{form.impressionsLinkedin}}</p>
+                <p>Likes LinkedIn: {{form.likesLinkedin}}</p>
+                <p>Partages LinkedIn: {{form.partagesLinkedin}}</p>
+                
+                <p>Impressions Facebook: {{form.impressionsFacebook}}</p>
+                <p>Likes Facebook: {{form.likesFacebook}}</p>
+                <p>Partages Facebook: {{form.partagesFacebook}}</p>
+                
+                <p>Impressions Instagram: {{form.impressionsInstagram}}</p>
+                <p>Likes Instagram: {{form.likesInstagram}}</p>
+                <p>Partages Instagram: {{form.partagesInstagram}}</p>
+                
+                <p>Impressions Twitter: {{form.impressionsTwitter}}</p>
+                <p>Likes Twitter: {{form.likesTwitter}}</p>
+                <p>Partages Twitter: {{form.partagesTwitter}}</p>
+
                 <input type="submit" name="Submit">
             </form>
         </div>

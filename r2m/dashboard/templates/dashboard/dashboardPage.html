@@ -1,0 +1,102 @@
+{%  extends 'dashboard/main.html' %}
+
+{% block content %}
+	<br>
+
+<!--1re ligne-->
+	<div class="row">
+		<div class="col-md">
+			<div class="card card-body">
+				<h5>Options:</h5>
+				<hr>
+				<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_client' %}">Ajouter un cLient</a>
+			</div>
+		</div>
+
+		<div class="col-md">
+			<div class="card card-body">
+
+                <h5>Diagramme Circulaire proportion de prospects, clients et leads qualifiés</h5>
+				<hr>
+
+			</div>
+		</div>
+
+		<div class="col-md">
+			<div class="card card-body">
+				<h5>Diagramme Circulaire typologies de Leads</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{videos_count}}</h1>
+			</div>
+		</div>
+	</div>
+
+<!--2e ligne (taux de conversion client, taux de rentabilité, marge commerciale)-->
+	<br>
+	<div class="row">
+		
+		<div class="col-md">
+			<div class="card card-body">
+				<h5>Taux de conversion</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{clientRev}}</h1>
+			</form>
+			</div>
+		</div>
+
+		<div class="col-md">
+			<div class="card card-body">
+				<h5>Taux de rentabilité</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{clientCost}}</h1>
+			</form>
+			</div>
+		</div>
+		
+        <div class="col-md">
+			<div class="card card-body">
+				<h5>Marge commerciale</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{clientCost}}</h1>
+			</form>
+			</div>
+		</div>
+	
+    </div>
+	<br>
+
+    <!--3e ligne (chiffres d'affaires, coûts et marge brute)-->
+
+	<div class="row">
+		
+		<div class="col-md">
+			<div class="card card-body">
+				<h5>Chiffre d'affaires total</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{clientRev}}</h1>
+			</form>
+			</div>
+		</div>
+
+		<div class="col-md">
+			<div class="card card-body">
+				<h5>Coûts total</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{clientCost}}</h1>
+			</form>
+			</div>
+		</div>
+		
+        <div class="col-md">
+			<div class="card card-body">
+				<h5>Marge brute</h5>
+				<hr>
+				<h1 style="text-align: center;padding: 10px">{{clientCost}}</h1>
+			</form>
+			</div>
+		</div>
+	
+    </div>
+	<br>
+
+{% endblock %}

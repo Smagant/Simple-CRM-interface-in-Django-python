@@ -8,7 +8,7 @@
 			<div class="card card-body">
 				<h5>Client:</h5>
 				<hr>
-				<a class="btn btn-outline-info  btn-sm btn-block" href="">Modifier CLient</a>
+				<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'update_client' client.id %}">Modifier CLient</a>
                 <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_video' client.id %}">Ajouter une vidéo</a>
 			</div>
 		</div>
@@ -68,6 +68,8 @@
 						<th>Cadreur</th>
 						<th>Ingénieur Son</th>
                         <th>Monteur</th>
+						<th></th>
+						<th></th>
 					</tr>
 
 					{% for video in videos %}
