@@ -8,20 +8,22 @@
                 <tr>
                     <th></th>
                     <th>Nom de la vidéo</th>
-                    <th>CLient associé</th>
+                    <th>Client associé</th>
                     <th>Étape de production</th>
                     <th>Date de publication</th>
                     <th>Chef de projet</th>
+                    <th></th>
                 </tr>
 
                 {% for video in videos %}
                     <tr>
                         <td><a class="btn btn-sm btn-info" href="{% url 'video' video.id  %}">Fiche video</a></td>
                         <td>{{video.videoName}}</td>
-                        <td>{{video.client}}</td>
+                        <td>{{video.client.lastname}}</td>
                         <td>{{video.stage}}</td>
                         <td>{{video.datePublication}}</td>
                         <td>{{video.chefProjet}}</td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_video' video.id  %}">Supprimer</a></td>
                     </tr>
                 {% endfor %}
             </table>

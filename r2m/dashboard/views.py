@@ -1,12 +1,101 @@
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 
+
 from .models import *
 from .forms import VideoForm, ClientForm
 
+#Fonction pour la page d'accueil contenant le dashboard
+def home(request):
+    clients = Client.objects.all()
+    videos = Video.objects.all()
+    
+    #Calculer le chiffre d'affaires et le coût total total généré sur l'ensemble des vidéos
+    totalRev = 0
+    totalCost = 0
+    for v in videos:
+        try:
+            totalCost += v.chefProjet.cost + v.cadreur.cost + v.ingénieurSon.cost + v.monteur.cost
+            totalRev += v.revenusGen
+        except:
+            continue
 
-def home(request): 
-    context = {'title': 'test'}
+    grossMarginPercent = round(((totalRev - totalCost)/totalRev)*100)
+    grossMarginValue = totalRev - totalCost
+    
+    #Nombre total d'individus dans la base de données
+    nbIndiv = clients.count()
+
+    nbClients = 0
+    for i in clients:
+        try:
+            if i.statut == 'Client':
+                nbClients += 1
+                continue
+        except:
+            continue
+    
+    nbLeads = 0
+    for i in clients:
+        try:
+            if i.statut == 'Lead qualifié':
+                nbLeads += 1
+                continue
+        except:
+            continue
+    
+    nbProspects = 0
+    for i in clients:
+        try:
+            if i.statut == 'Prospect':
+                nbProspects += 1
+                continue
+        except:
+            continue
+    
+    nbAvocats = 0
+    for i in clients:
+        try:
+            if i.profession == 'Avocat':
+                nbAvocats += 1
+                continue
+        except:
+            continue
+    
+    nbMaires = 0
+    for i in clients:
+        try:
+            if i.profession == 'Maire':
+                nbMaires += 1
+                continue
+        except:
+            continue
+    
+    
+    nbExpCompt = 0
+    for i in clients:
+        try:
+            if i.profession == 'Expert-comptable':
+                nbExpCompt += 1
+                continue
+        except:
+            continue
+
+    conversionRate = round((nbClients/nbIndiv)*100)
+    context = {
+        'totalRev':totalRev,
+        'totalCost':totalCost,
+        'grossMarginValue':grossMarginValue,
+        'grossMarginPercent':grossMarginPercent,
+        'nbIndiv':nbIndiv,
+        'nbClients':nbClients,
+        'nbLeads':nbLeads,
+        'nbProspects':nbProspects,
+        'nbAvocats':nbAvocats,
+        'nbMaires':nbMaires,
+        'nbExpCompt':nbExpCompt,
+        'conversionRate':conversionRate
+    }
     return render(request, 'dashboard/dashboardPage.html', context)
 
 def clientsBasePage(request):
