@@ -35,7 +35,6 @@ class Cadreur(models.Model):
     def __str__(self):
         return self.lastname
 
-
 class IngenieurSon(models.Model):
     firstname = models.CharField(max_length=200, null=True, blank=True)
     lastname = models.CharField(max_length=200, null=True, blank=True)

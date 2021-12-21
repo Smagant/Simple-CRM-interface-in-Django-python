@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
-
-
 from .models import *
 from .forms import VideoForm, ClientForm
+
 
 #Fonction pour la page d'accueil contenant le dashboard
 def home(request):
@@ -26,6 +25,7 @@ def home(request):
     #Nombre total d'individus dans la base de données
     nbIndiv = clients.count()
 
+    #Nombre total d'individus ayant le statut de clients
     nbClients = 0
     for i in clients:
         try:
@@ -35,6 +35,7 @@ def home(request):
         except:
             continue
     
+    #Nombre total d'individus ayant le statut de leads qualifiés
     nbLeads = 0
     for i in clients:
         try:
@@ -44,6 +45,7 @@ def home(request):
         except:
             continue
     
+    #Nombre total d'individus ayant le statut de prospects
     nbProspects = 0
     for i in clients:
         try:
@@ -53,6 +55,7 @@ def home(request):
         except:
             continue
     
+    #Nombre total d'individus ayant pour profession : avocat
     nbAvocats = 0
     for i in clients:
         try:
@@ -62,6 +65,7 @@ def home(request):
         except:
             continue
     
+    #Nombre total d'individus ayant pour profession : maire
     nbMaires = 0
     for i in clients:
         try:
@@ -71,7 +75,7 @@ def home(request):
         except:
             continue
     
-    
+    #Nombre total d'individus ayant pour profession : expert-comptable
     nbExpCompt = 0
     for i in clients:
         try:
@@ -81,7 +85,9 @@ def home(request):
         except:
             continue
 
+    #Taux de conversion client
     conversionRate = round((nbClients/nbIndiv)*100)
+    
     context = {
         'totalRev':totalRev,
         'totalCost':totalCost,
@@ -98,11 +104,13 @@ def home(request):
     }
     return render(request, 'dashboard/dashboardPage.html', context)
 
+#Fonction pour la page de listing des clients
 def clientsBasePage(request):
     clients = Client.objects.all()
     context = {'clients': clients}
     return render(request, 'dashboard/clientsBasepage.html', context)
 
+#Fonction pour la page spécifique de chaque client
 def clientPage(request, pk):
     #Récupérer les informations du client
     client = Client.objects.get(id=pk)
@@ -127,17 +135,20 @@ def clientPage(request, pk):
     context = {'client': client, 'videos':videos, 'videos_count':videos_count, 'clientCost': clientCost, 'clientRev':clientRev}
     return render(request, 'dashboard/client.html', context)
 
+#Fonction pour la page de listing de toutes les vidéos
 def videoBasePage(request):
     videos = Video.objects.all()
     context = {'videos': videos}
     return render(request, 'dashboard/videosBasepage.html', context)
 
+#Fonction pour la page spécifique pour chaque vidéo
 def videoPage(request, pk):
     video = Video.objects.get(id=pk)
     cost = video.chefProjet.cost + video.cadreur.cost + video.ingénieurSon.cost + video.monteur.cost
     context = {'video':video, 'cost':cost}
     return render(request, 'dashboard/video.html', context)
 
+#Fonction pour créer un client 
 def createClient(request):
 	form = ClientForm()
 	if request.method == 'POST':
@@ -149,7 +160,31 @@ def createClient(request):
 	context = {'form':form}
 	return render(request, 'dashboard/client_form.html', context)
 
+#Fonction pour modifier un client
+def updateClient(request, pk):
+	client = Client.objects.get(id=pk)
+	form = ClientForm(instance=client)
 
+	if request.method == 'POST':
+		form = ClientForm(request.POST, instance=client)
+		if form.is_valid():
+			form.save()
+			return redirect('/')
+
+	context = {'form':form}
+	return render(request, 'dashboard/client_updateForm.html', context)
+
+#Fonction pour supprimer un client
+def deleteClient(request, pk):
+    client = Client.objects.get(id=pk)
+    if request.method == "POST":
+        client.delete()
+        return redirect('/')
+    context = {'item':client}
+    return render(request, 'dashboard/deleteClient.html', context)
+
+
+#Fonction pour créer une vidéo
 def createVideo(request, pk):
     videoFields = (
         'videoName',
@@ -180,10 +215,7 @@ def createVideo(request, pk):
     VideoFormSet = inlineformset_factory(Client, Video, fields=videoFields, extra=1)
     client = Client.objects.get(id=pk)
     formset = VideoFormSet(queryset=Video.objects.none(), instance=client)
-    #form = OrderForm(initial={'customer':customer})
     if request.method == 'POST':
-        #print('Printing POST',request.POST)
-        #form = OrderForm(request.POST)
         formset = VideoFormSet(request.POST, instance=client)
         if formset.is_valid():
             formset.save()
@@ -192,7 +224,7 @@ def createVideo(request, pk):
     context = {'formset':formset}     
     return render(request, 'dashboard/video_form.html', context)
 
-
+#Fonction pour mettre à jour une vidéo
 def updateVideo(request, pk):
 	video = Video.objects.get(id=pk)
 	form = VideoForm(instance=video)
@@ -206,6 +238,7 @@ def updateVideo(request, pk):
 	context = {'form':form}
 	return render(request, 'dashboard/video_updateForm.html', context)
 
+#Fonction pour supprimer une vidéo
 def deleteVideo(request, pk):
     video = Video.objects.get(id=pk)
     if request.method == "POST":
@@ -213,24 +246,3 @@ def deleteVideo(request, pk):
         return redirect('/')
     context = {'item':video}
     return render(request, 'dashboard/deleteVideo.html', context)
-
-def updateClient(request, pk):
-	client = Client.objects.get(id=pk)
-	form = ClientForm(instance=client)
-
-	if request.method == 'POST':
-		form = ClientForm(request.POST, instance=client)
-		if form.is_valid():
-			form.save()
-			return redirect('/')
-
-	context = {'form':form}
-	return render(request, 'dashboard/client_updateForm.html', context)
-
-def deleteClient(request, pk):
-    client = Client.objects.get(id=pk)
-    if request.method == "POST":
-        client.delete()
-        return redirect('/')
-    context = {'item':client}
-    return render(request, 'dashboard/deleteClient.html', context)
