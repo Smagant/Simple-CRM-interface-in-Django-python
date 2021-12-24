@@ -6,7 +6,7 @@ Cette application a pour but de faciliter le monitoring et la gestion d'un servi
 
 ## Comment ouvrir l'application
 
-Une fois dans le dossier ```r2m```, entrez la commande ci-dessous pour installer toutes les dépendances nécessaires pour utiliser l'application
+Une fois dans le dossier ```r2m```, entrez la commande ci-dessous dans votre terminal pour installer toutes les dépendances nécessaires pour utiliser l'application
 ```bash
 pip install -r requirements.txt
 ```
