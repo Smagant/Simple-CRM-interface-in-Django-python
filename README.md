@@ -15,3 +15,11 @@ Ensuite rentrer cette commande dans le même dossier pour lancer le server local
 python manage.py runserver
 ```
 Rentrez l'adresse locale générée dans votre barre d'URL de votre navigateur pour accéder à l"application
+
+## Comment comprendre le fonctionnement de Django
+
+Chaque page possède un URL. les URLs sont écris dans le fichier python ```r2m/dashboard/urls.py```. Chaque url, une fois ouvert active une fonction python présente dans le fichier python ```r2m/dashboard/views.py```. Chaque fonction retourne des données dans le un fichier HTML de la page concernée afin de pouvoir les afficher. Les fichiers HTML sont disponible dans le dossier ```r2m/dashboard/templates/dashboard/```.
+
+Chaque base de données a été construite dans le fichier python ```r2m/dashboard/models.py```. Le fichier ```r2m/dashboard/forms.py``` permet de pouvoir enrichir la base de données  directement dans l'application. 
+
+
