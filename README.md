@@ -20,6 +20,4 @@ Rentrez l'adresse locale générée dans votre barre d'URL de votre navigateur p
 
 Chaque page web de l'application possède un URL. les URLs sont codés dans le fichier python ```r2m/dashboard/urls.py```. Chaque url, une fois ouvert active une fonction python codée dans le fichier ```r2m/dashboard/views.py```. Chaque fonction retourne des données dans le fichier HTML de la page concernée afin de pouvoir les afficher (les fichiers HTML sont disponible dans le dossier ```r2m/dashboard/templates/dashboard/```). Chaque donnée traitée par python provient d'une base de données. Chaque base de données a été conçue par un modèle. Tous les modèles sont codés dans le fichier python ```r2m/dashboard/models.py```. Le fichier ```r2m/dashboard/forms.py``` contient les fonctions permettant d'enrichir la base de données directement dans l'application.
 
-Le dossier ```r2m/r2m``` est le dossier mère de l'application. Il a été généré automatiquement par le framework Django pour construire les bases techniques de l'application. J'ai simplement modifié certains paramètres pour que Django sache où lire le code de l'application écris dans le dossier ```r2m/dashboard```
-
 
